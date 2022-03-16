@@ -1,0 +1,59 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="images">
+    <th mat-header-cell *matHeaderCellDef>
+      &ndash;
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <img class="pokemon-image" src="{{ element.images?.small }}" alt="{{ element.name }}" />
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>
+      Nazwa
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="supertype">
+    <th mat-header-cell *matHeaderCellDef>
+      Super typ
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.supertype }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="number">
+    <th mat-header-cell *matHeaderCellDef>
+      Numer
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngFor="let number of element.nationalPokedexNumbers">
+        <div>{{ number }}</div>
+      </ng-container>
+  </ng-container>
+
+  <ng-container matColumnDef="types">
+    <th mat-header-cell *matHeaderCellDef>
+      Numer
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngFor="let type of element.types">
+        <div>{{ type }}</div>
+      </ng-container>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element" class="button-row">
+      <section>
+        <button [routerLink]="'details/' + element.id" mat-raised-button color="accent">Pokaż szczegóły</button>
+      </section>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns"></tr>
+</table>
+
+<mat-paginator [pageSizeOptions]="[20, 50, 100]" [length]="totalCount" [pageIndex]="page" [pageSize]="pageSize"></mat-paginator>

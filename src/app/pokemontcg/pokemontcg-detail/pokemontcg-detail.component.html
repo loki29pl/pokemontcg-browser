@@ -1,0 +1,70 @@
+<button mat-raised-button color="accent" [routerLink]="'../../'">
+  Wróc do listy
+</button>
+
+<section class="cards" *ngIf="pokemonCard">
+  <mat-card>
+    <mat-card-title>
+      Zdjęcie karty
+    </mat-card-title>
+    <mat-card-content>
+      <img src="{{ pokemonCard.images.large }}" alt="Pokemon card image" />
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>
+      Podstawowe dane
+    </mat-card-title>
+    <mat-card-content>
+      <table class="table">
+        <tr>
+          <th>Nazwa</th>
+          <td>{{ pokemonCard.name }}</td>
+        </tr>
+        <tr>
+          <th>Super typ</th>
+          <td>{{ pokemonCard.supertype }}</td>
+        </tr>
+        <tr>
+          <th>Typ</th>
+          <td>
+            <ng-container *ngFor="let type of pokemonCard.types">
+              <div>{{ type }}</div>
+            </ng-container>
+          </td>
+        </tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>
+      Statystyki
+    </mat-card-title>
+    <mat-card-content>
+      <table class="table">
+        <tr>
+          <th>HP</th>
+          <td>{{ pokemonCard.hp }}</td>
+        </tr>
+        <tr>
+          <th>Odporności</th>
+          <td>
+            <ng-container *ngFor="let resistance of pokemonCard.resistances">
+              <div>{{ resistance.type }}: {{ resistance.value }}</div>
+            </ng-container>
+          </td>
+        </tr>
+        <tr>
+          <th>Słabości</th>
+          <td>
+            <ng-container *ngFor="let weakness of pokemonCard.weaknesses">
+              <div>{{ weakness.type }}: {{ weakness.value }}</div>
+            </ng-container>
+          </td>
+        </tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</section>
